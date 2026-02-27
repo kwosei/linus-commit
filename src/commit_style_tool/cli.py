@@ -296,7 +296,7 @@ def build_parser() -> argparse.ArgumentParser:
     synth_cmd.add_argument("--output", required=True, help="Output guidelines JSON")
     synth_cmd.add_argument("--username", required=True, help="Target user")
     synth_cmd.add_argument("--repo", required=True, help="Target repository")
-    synth_cmd.add_argument("--provider", default="openai", choices=["openai", "gemini", "none"])
+    synth_cmd.add_argument("--provider", default="anthropic", choices=["anthropic", "openai", "gemini", "none"])
     synth_cmd.add_argument("--model", default=None, help="Model name; provider default is used when omitted")
     synth_cmd.set_defaults(func=run_synthesize)
 
@@ -327,7 +327,7 @@ def build_parser() -> argparse.ArgumentParser:
     gen_cmd.add_argument("--drop-reverts", action="store_true")
     gen_cmd.add_argument("--limit", type=int, default=None)
     gen_cmd.add_argument("--refresh", action="store_true")
-    gen_cmd.add_argument("--provider", default="openai", choices=["openai", "gemini", "none"])
+    gen_cmd.add_argument("--provider", default="anthropic", choices=["anthropic", "openai", "gemini", "none"])
     gen_cmd.add_argument("--model", default=None, help="Model name; provider default is used when omitted")
     gen_cmd.add_argument("--holdout-ratio", type=float, default=0.2)
     gen_cmd.add_argument("--seed", type=int, default=42)
