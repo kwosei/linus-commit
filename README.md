@@ -2,6 +2,17 @@
 
 CLI pipeline to infer a commit-message style from a GitHub repo + author and package the result as a Claude-style skill.
 
+## Repo structure
+
+This repository has two main pieces:
+
+| Part | Description | Link |
+|---|---|---|
+| Pipeline | Python CLI pipeline that collects commits, infers style rules, and packages skills. | [`src/`](src/) |
+| Skill | Ready-to-use generated skill for this repo. | [`outputs/skills/linus-commit/SKILL.md`](outputs/skills/linus-commit/SKILL.md) |
+
+If you only want the skill, go directly to [`outputs/skills/linus-commit/`](outputs/skills/linus-commit/).
+
 ## What it does
 
 1. Collect commit metadata for a target author (`collect`)
