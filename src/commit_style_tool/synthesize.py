@@ -132,20 +132,63 @@ def _extract_gemini_text(response: dict[str, Any]) -> str:
     raise ValueError("Gemini response candidates did not include text content")
 
 
-def _build_prompt(analysis: dict[str, Any], username: str, repo: str) -> str:
-    # Keep the prompt compact but include enough signal for concrete guidance.
-    compact = {
+def _anonymize_analysis(analysis: dict[str, Any]) -> dict[str, Any]:
+    """Strip repo-specific identifiers from the analysis to encourage generalized rules.
+
+    Keeps rates, distributions, and structural patterns but removes specific
+    prefix names (e.g. 'mm', 'x86') and trailer key names (e.g. 'Signed-off-by')
+    so the LLM infers portable rules instead of repo-bound ones.
+    """
+    compact: dict[str, Any] = {
         "record_count": analysis.get("record_count"),
-        "subject": analysis.get("subject"),
-        "body": analysis.get("body"),
-        "trailers": analysis.get("trailers"),
         "semantic_cues": analysis.get("semantic_cues"),
         "samples": analysis.get("samples", [])[:8],
     }
+
+    # Subject: keep stats and rates, drop specific prefix names
+    subject = analysis.get("subject")
+    if isinstance(subject, dict):
+        compact["subject"] = {
+            "char_length": subject.get("char_length"),
+            "word_length": subject.get("word_length"),
+            "prefix_rate": subject.get("prefix_rate"),
+            "unique_prefix_count": len(subject.get("top_prefixes", [])),
+            "imperative_proxy_rate": subject.get("imperative_proxy_rate"),
+            "capitalized_start_rate": subject.get("capitalized_start_rate"),
+        }
+
+    # Body: pass through as-is (already general)
+    compact["body"] = analysis.get("body")
+
+    # Trailers: keep rate and count of distinct keys, drop specific key names
+    trailers = analysis.get("trailers")
+    if isinstance(trailers, dict):
+        compact["trailers"] = {
+            "present_rate": trailers.get("present_rate"),
+            "unique_key_count": len(trailers.get("top_keys", [])),
+        }
+
+    return compact
+
+
+def _build_prompt(analysis: dict[str, Any], username: str, repo: str) -> str:
+    compact = _anonymize_analysis(analysis)
     return (
-        "Infer commit-message style rules from this author profile and return only JSON.\n"
-        f"Target author: {username}\n"
-        f"Repository: {repo}\n\n"
+        "Analyze the following commit-message corpus statistics and sample commits, "
+        "then infer **generalized** style rules. Return only JSON.\n\n"
+        "IMPORTANT — Generalization requirements:\n"
+        "- Rules must be portable across ANY repository, not tied to this specific project.\n"
+        "- Do NOT reference specific subsystem names, file paths, module names, or "
+        "project-specific conventions from the sample commits.\n"
+        "- Express prefix/scope patterns generically (e.g. 'use a scope prefix' not "
+        "'use mm: or x86:').\n"
+        "- Express trailer patterns generically (e.g. 'include sign-off trailers when "
+        "required by project policy' not 'always add Signed-off-by').\n"
+        "- Capture the *structural* and *tonal* patterns — length, casing, verb mood, "
+        "body structure, level of explanation — not project-specific vocabulary.\n"
+        "- The sample commits are provided for tone and structure inference only; "
+        "do not reproduce their domain-specific content in rules.\n\n"
+        f"Corpus source: {username} in {repo} (for context only, rules must generalize)\n\n"
         "Schema:\n"
         "{\n"
         '  "rules": [{"instruction": string, "rationale": string, "evidence_commit_ids": [string]}],\n'
@@ -157,7 +200,7 @@ def _build_prompt(analysis: dict[str, Any], username: str, repo: str) -> str:
         "}\n\n"
         "Constraints:\n"
         "- Use imperative language in each rule.\n"
-        "- Keep rules specific and testable.\n"
+        "- Keep rules specific and testable, but repo-agnostic.\n"
         "- Cite evidence commit IDs from samples when possible.\n"
         "- Preserve ambiguity by adding confidence notes instead of over-claiming.\n\n"
         f"Profile JSON:\n{json.dumps(compact, indent=2)}"
@@ -387,7 +430,11 @@ def synthesize_guidelines(
     model_name = model.strip() if isinstance(model, str) and model.strip() else DEFAULT_MODEL_BY_PROVIDER[provider_clean]
 
     prompt = _build_prompt(analysis, username=username, repo=repo)
-    system_prompt = "You are a precise commit-style analyst. Return valid JSON only and follow the schema exactly."
+    system_prompt = (
+        "You are a precise commit-style analyst. Return valid JSON only and follow the schema exactly. "
+        "Your goal is to extract generalized, portable commit-message style rules that work across "
+        "any repository — not rules specific to the analyzed project."
+    )
     messages = [
         {
             "role": "system",

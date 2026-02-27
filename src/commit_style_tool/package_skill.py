@@ -40,8 +40,9 @@ def _build_skill_markdown(
     guidelines: dict,
 ) -> str:
     description = (
-        "Generate and rewrite git commit messages in the style inferred from "
-        f"{username}'s commits in {repo}. Use when drafting commit messages, "
+        "Generate and rewrite git commit messages following a style guide "
+        f"inferred from {username}'s commits in {repo}. The rules are generalized "
+        "and portable — use them when drafting commit messages in any repository, "
         "reviewing message quality, or converting raw change notes into a final commit message."
     )
 
