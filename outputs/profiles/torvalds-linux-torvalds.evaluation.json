@@ -1,219 +1,2019 @@
 {
   "details": {
-    "expected_body_rate": 0.5,
-    "expected_prefix_rate": 0.26,
-    "expected_rationale_rate": 0.32,
-    "expected_trailer_rate": 0.5,
+    "expected_body_rate": 0.621,
+    "expected_prefix_rate": 0.483,
+    "expected_rationale_rate": 0.378,
+    "expected_trailer_rate": 0.621,
     "subject_target": {
-      "p10": 14.0,
-      "p90": 68.10000000000001
+      "p10": 13.0,
+      "p90": 66.0
     }
   },
-  "guideline_rule_count": 4,
-  "holdout_count": 20,
+  "guideline_rule_count": 11,
+  "holdout_count": 200,
   "holdout_scores": [
     {
-      "body_score": 0.5,
-      "hash": "f83ec76bf285bea5727f478a68b894f5543ca76e",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.17-rc6",
-      "subject_score": 1.0,
-      "trailer_score": 0.5
-    },
-    {
-      "body_score": 0.5,
-      "hash": "07e27ad16399afcd693be20211b0dfae63e0615f",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.17-rc7",
-      "subject_score": 1.0,
-      "trailer_score": 0.5
-    },
-    {
-      "body_score": 0.5,
-      "hash": "c27c66afc449b80f3b4b84d123358c0248f2cf63",
+      "body_score": 0.621,
+      "hash": "1b6b26ae7053e4914181eedf70f2d92c12abda8a",
       "prefix_score": 1.0,
-      "rationale_score": 0.68,
-      "style_fit": 0.777,
-      "subject": "fs/pipe: Fix pipe_occupancy() with 16-bit indexes",
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "pipe: fix and clarify pipe write wakeup logic",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "1ca28333e464989113e518b452eaaccc79d865c8",
+      "body_score": 0.621,
+      "hash": "98f2345773f9ac739350230a85f9a7f7b1fe21a6",
       "prefix_score": 1.0,
-      "rationale_score": 0.32,
-      "style_fit": 0.723,
-      "subject": "x86: keep legacy generated vdso files around in .gitignore file",
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "unicode: fix .gitignore for generated utfdata file",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "a5806cd506af5a7c19bcd596e4708b5c464bfd21",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.15-rc7",
+      "body_score": 0.379,
+      "hash": "651022382c7f8da46cb4872a545ee1da6d097d2a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.20-rc1",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.379
     },
     {
-      "body_score": 0.5,
-      "hash": "89be9a83ccf1f88522317ce02f854f30d6115c41",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.16-rc7",
+      "body_score": 0.379,
+      "hash": "d72e90f33aa4709ebecc5005562f52335e106a60",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.18-rc6",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.379
     },
     {
-      "body_score": 0.5,
-      "hash": "551d44200152cb26f75d2ef990aeb6185b7e37fd",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "default_gfp(): avoid using the \"newfangled\" __VA_OPT__ trick",
+      "body_score": 0.379,
+      "hash": "dcb6fa37fd7bc9c3d2b066329b0d27dedf8becaa",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.18-rc3",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.379
     },
     {
-      "body_score": 0.5,
-      "hash": "9d7a0577c9db35c4cc52db90bc415ea248446472",
+      "body_score": 0.621,
+      "hash": "9becb688913023124464c5463b4389b3b293f0e7",
       "prefix_score": 1.0,
-      "rationale_score": 0.32,
-      "style_fit": 0.714,
-      "subject": "gcc-15: disable '-Wunterminated-string-initialization' entirely for now",
-      "subject_score": 0.973,
-      "trailer_score": 0.5
-    },
-    {
-      "body_score": 0.5,
-      "hash": "0f61b1860cc3f52aef9036d7235ed1f017632193",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.19-rc5",
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "kvmalloc: use vmalloc_huge for vmalloc allocations",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "0af2f6be1b4281385b618cb86ad946eded089ac8",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.15-rc1",
+      "body_score": 0.379,
+      "hash": "80e54e84911a923c40d7bee33a34c1b4be148d7a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.14-rc6",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.379
     },
     {
-      "body_score": 0.5,
-      "hash": "05e8d261a34e5c637e37be55c26e42cf5c75ee5c",
+      "body_score": 0.379,
+      "hash": "2c523b344dfa65a3738e7039832044aa133c75fb",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.6-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "6ccdc91d6af922f3ded5de494ff27daedeb6d6c9",
       "prefix_score": 1.0,
-      "rationale_score": 0.32,
-      "style_fit": 0.723,
-      "subject": "gcc-15: add '__nonstring' markers to byte arrays",
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86: mm: remove architecture-specific 'access_ok()' define",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "35149653ee29d925ea0c2b5ca0eacf0af32be34f",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "smb client: Add generated file to gitignore file",
+      "body_score": 0.621,
+      "hash": "05b8cd3db706029f6a31d26c204facf422bd782c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Add 'tools/perf/libbpf/' to ignored files",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "d0b3b7b22dfa1f4b515fd3a295b3fd958f9e81af",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.16-rc4",
+      "body_score": 0.621,
+      "hash": "17e6a1213058d8759bcf043151c04612df55ebc4",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "um: Use generic runtime constant implementation",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
+      "body_score": 0.621,
+      "hash": "ab9bb6318b0967671e0c9b6537c1537d51ca4f45",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Partially revert \"kfifo: fix kfifo_alloc() and kfifo_init()\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "449c796768c9a1c738d1fa8671fb01663380b8a7",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.758,
+      "subject": "mm: teach release_pages() to take an array of encoded page pointers too",
+      "subject_score": 0.953,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "9b1ea29bc0d7b94d420f96a0f4121403efc3dd85",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.604,
+      "subject": "Revert \"mm, slub: consider rest of partial list if acquire_slab() fails\"",
+      "subject_score": 0.943,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "856deb866d16e29bd65952e0289066f6078af773",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.9-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "3593030761630e09200072a4bd06468892c27be3",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.748,
+      "subject": "tty: n_tty: do not look ahead for EOL character past the end of the buffer",
+      "subject_score": 0.925,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "d5226fa6dbae0569ee43ecfc08bdcd6770fc4755",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.563,
+      "subject": "Linux 5.5",
+      "subject_score": 0.962,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "038d61fd642278bab63ee8ef722c50d10ab01e8f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.566,
+      "subject": "Linux 6.16",
+      "subject_score": 0.972,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "6a8b55ed4056ea5559ebe4f6a4b247f627870d4c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.7-rc3",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "45a3e24f65e90a047bef86f927ebdc4c710edaa1",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.4-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "ff6992735ade75aae3e35d16b17da1008d753d28",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.19-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "8e0d0ad206f08506c893326ca7c9c3d9cc042cef",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "sparc64: disable fast-GUP due to unexplained oopses",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "994e2419f1e77724479f0ffd5ad4eeae060dec95",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "nfs: fix mis-merged __filemap_get_folio() error check",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "842c3b3ddc5f4d17275edbaa09e23d712bf8b915",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "mellanox: mlx5: avoid uninitialized variable warning with gcc-12",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "92bf22614b21a2706f4993b278017e437f7785b3",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.11-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "4b0986a3613c92f4ec1bdc7f60ec66fea135991f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.566,
+      "subject": "Linux 5.18",
+      "subject_score": 0.972,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "1e28eed17697bcf343c6743f0028cc3b5dd88bf0",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.12-rc3",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "fc7c028dcdbfe981bca75d2a7b95f363eb691ef3",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "sparc: avoid stringop-overread errors",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "427fda2c8a4977d9dbd9bc108bbe6e21ec84648d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86: improve on the non-rep 'copy_user' function",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "d1eef1c619749b2a57e514a3fa67d9a516ffa919",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.5-rc2",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "c7135bbe5af2094ef48dff684a5de045f6df66ce",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "tty: fix up hung_up_tty_write() conversion",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "ce397d215ccd07b8ae3f71db689aedb85d56ab40",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.18-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "0f1a7b3fac0583083ca19d4de47403511ced3521",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "timer-of: don't use conditional expression with mixed 'void' types",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "fe673d3f5bf1fc50cdc4b754831db91a2ec10126",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "mm: gup: make fault_in_safe_writeable() use fixup_user_fault()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "95faf6992df468f617edb788da8c21c6eed0dfa7",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "mm: make vm_area_dup() actually copy the old vma data",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d2c95f9d6802cc518d71d9795f4d9da54fb4e24d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86: don't use REP_GOOD or ERMS for user memory clearing",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "293837b9ac8d3021657f44c9d7a14948ec01c5d0",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Revert \"i915: fix remap_io_sg to verify the pgprot\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "b9bbe6ed63b2b9f2c9ee5cbd0f2c946a2723f4ce",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.7-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "8c2e52ebbe885c7eeaabd3b7ddcdc1246fc400d2",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.758,
+      "subject": "eventpoll: don't decrement ep refcount while still holding the ep mutex",
+      "subject_score": 0.953,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "52826d3b2d1d8e1180a84bef7d72596d6a024a38",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "kernel/utsname_sysctl.c: Fix hostname polling",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
       "hash": "86731a2a651e58953fc949573895f2fa6d456841",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
       "subject": "Linux 6.16-rc3",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.379
     },
     {
-      "body_score": 0.5,
-      "hash": "ac71fabf15679fc7bc56c51bc92bd4b626564c37",
+      "body_score": 0.621,
+      "hash": "e01a83e12604aa2f8d4ab359ec44e341a2248b4a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.647,
+      "subject": "Revert \"btrfs: zstd: fix and simplify the inline extent decompression\"",
+      "subject_score": 0.962,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "e42617b825f8073569da76dc4510bfa019b1c35a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.5-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "0c3836482481200ead7b416ca80c68a29cfdaabd",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.566,
+      "subject": "Linux 6.10",
+      "subject_score": 0.972,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f0be87c42cbd341d436d06da4792e6b0c83c3aeb",
       "prefix_score": 1.0,
-      "rationale_score": 0.32,
-      "style_fit": 0.723,
-      "subject": "gcc-15: work around sequence-point warning",
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "gcc-12: disable '-Warray-bounds' universally for now",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "ebf2bfec412ad293a0b118fb1a20a551088ebc9b",
+      "body_score": 0.621,
+      "hash": "b9959c7a347d6adbb558fba7e36e9fef3cba3b07",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "filldir[64]: remove WARN_ON_ONCE() for bad directory entries",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "9f499b8c791d2983c0a31a543c51d1b2f15e8755",
       "prefix_score": 1.0,
-      "rationale_score": 0.68,
-      "style_fit": 0.777,
-      "subject": "MAINTAINERS: mark bcachefs externally maintained",
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "minmax: scsi: fix mis-use of 'clamp()' in sr.c",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "8f5ae30d69d7543eee0d70083daf4de8fe15d585",
-      "prefix_score": 0.7,
-      "rationale_score": 0.68,
-      "style_fit": 0.732,
-      "subject": "Linux 6.17-rc1",
-      "subject_score": 1.0,
-      "trailer_score": 0.5
-    },
-    {
-      "body_score": 0.5,
-      "hash": "3d252160b818045f3a152b13756f6f37ca34639d",
+      "body_score": 0.621,
+      "hash": "f8eb5bd9a818cc5f2a1e50b22b0091830b28cc36",
       "prefix_score": 1.0,
-      "rationale_score": 0.32,
-      "style_fit": 0.723,
-      "subject": "fs/pipe: Read pipe->{head,tail} atomically outside pipe->mutex",
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "mm: fix build on 32-bit targets without MAX_PHYSMEM_BITS",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
+      "body_score": 0.621,
+      "hash": "3680785692fbc57453a7bf973f962a92d1b9ec33",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "x86: get rid of 'rtype' argument to __put_user_goto() macro",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f372b2256acbfbbf703cfdfae3d02c5a6c0e1679",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "vsnprintf: inline skip_atoi() again",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "4fe89d07dcc2804c8b562f6c7896a45643d34b2f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.563,
+      "subject": "Linux 6.0",
+      "subject_score": 0.962,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f67b15037a7a50c57f72e69a6d59941ad90a0f0f",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "perf/hwbp: Simplify the perf-hwbp code, fix documentation",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "9448598b22c50c8a5bb77a9103e2d49f134c9578",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.19-rc2",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "58b0afa038bb404ff82b358b68db5ffa8f53c404",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "vfs: link_path_walk: improve may_lookup() code generation",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "0ba09b1733878afe838fe35c310715fda3d46428",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert \"mm: align larger anonymous mappings on THP boundaries\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "b4b27b9eed8ebdbf9f3046197d29d733c8c944f3",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert \"signal: Allow tasks to cache one sigqueue struct\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f3c64eda3e5097ec3198cb271f5f504d65d67131",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "mm: avoid early COW write protect games during fork()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "def9d2780727cec3313ed3522d0123158d87224d",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.5-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "3628e0383dd349f02f882e612ab6184e4bb3dc10",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Reapply \"drm/qxl: simplify qxl_fence_wait\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a180bd1d7e16173d965b263c5a536aa40afa2a2a",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "iov_iter: remove uaccess_kernel() warning from iov_iter_init()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "fc68f42aa737dc15e7665a4101d4168aadb8e4c4",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "ACPI: fix NULL pointer dereference",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "021a160abf62c19aff36c920566efb4f690e964a",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "fs: use __fput_sync in close(2)",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "feb889fb40fafc6933339cf1cca8f770126819fb",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "mm: don't put pinned pages into the swap cache",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "596ff4a09b8981790e15572e8e7bc904df5835e7",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "cpumask: re-introduce constant-sized cpumask optimizations",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "e046fe5a36a970bc14fbfbcb2074a48776f6b671",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86: set FSRS automatically on AMD CPUs that have FSRM",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "594cc251fdd0d231d342d88b2fdff4bc42fb0690",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "make 'user_access_begin()' do 'access_ok()'",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "afa4bb778e48d79e4a642ed41e3b4e0de7489a6c",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "workqueue: clean up WORK_* constant types, clarify masking",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "9ace4753a5202b02191d54e9fdf7f9e3d02b85eb",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.19-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "7fd298d4b39d8d5fe99d56811a7ed78c7a5377d5",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "arm64: start using 'asm goto' for put_user()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "551d44200152cb26f75d2ef990aeb6185b7e37fd",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "default_gfp(): avoid using the \"newfangled\" __VA_OPT__ trick",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "ee916dccd4df6e2fd19c3606c4735282b72f1473",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Unbreak 'make tools/*' for user-space targets",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "42aadec8c739727fce8e2c1ee71e72cb0f82ed3f",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "stat: remove no-longer-used helper macros",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "0313bc278dac7cd9ce83a8d384581dc043156965",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert \"random: block in /dev/urandom\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "68fb3ca0e408e00db1c3f8fccdfa19e274c033be",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "update workarounds for gcc \"asm goto\" issue",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "e783362eb54cd99b2cac8b3a9aeac942e6f6ac07",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.17-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "044ee890286153a1aefb40cb8b6659921aecb38b",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "HID: input: simplify/fix high-res scroll event handling",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "3beff76b54986fc3132fb62614875f116bba7701",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "x86: use proper parentheses around new uaccess macro argument uses",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "b1286ed7158e9b62787508066283ab0b8850b518",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "test_hexdump: use memcpy instead of strncpy",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
       "hash": "d5d45a7f26194460964eb5677a9226697f7b7fdd",
       "prefix_score": 1.0,
-      "rationale_score": 0.32,
-      "style_fit": 0.723,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
       "subject": "gcc-15: make 'unterminated string initialization' just a warning",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
     },
     {
-      "body_score": 0.5,
-      "hash": "f2c61db29f277b9c80de92102fc532cc247495cd",
-      "prefix_score": 0.7,
-      "rationale_score": 0.32,
-      "style_fit": 0.678,
-      "subject": "Remove bcachefs core code",
+      "body_score": 0.379,
+      "hash": "94710cac0ef4ee177a63b5227664b38c95bbf703",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.566,
+      "subject": "Linux 4.18",
+      "subject_score": 0.972,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "c512c69187197fe08026cb5bbe7b9709f4f89b73",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.731,
+      "subject": "uaccess: implement a proper unsafe_copy_to_user() and switch filldir over to it",
+      "subject_score": 0.877,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "63045bfd3c8dbe9c8bee7e33291202725154cb2c",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "netfilter: nf_tables: don't use 'data_size' uninitialized",
       "subject_score": 1.0,
-      "trailer_score": 0.5
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "017fa3e89187848fd056af757769c9e66ac3e93d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "minmax: simplify and clarify min_t()/max_t() implementation",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "baf76f0c58aec435a3a864075b8f6d8ee5d1f17e",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "slip: make slhc_free() silently accept an error pointer",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "e78298556ee5d881f6679effb2a6743969ea6e2d",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "runtime constants: add default dummy infrastructure",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "c79f46a282390e0f5b306007bf7b11a46d529538",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.5-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "771c035372a036f83353eef46dbb829780330234",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.614,
+      "subject": "deprecate the '__deprecated' attribute warnings entirely and for good",
+      "subject_score": 0.972,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "9013c51c630ac5a046aa2d51d67e966b6185f1cd",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.797,
+      "subject": "vfs: mostly undo glibc turning 'fstat()' into 'fstatat(AT_EMPTY_PATH)'",
+      "subject_score": 0.962,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "5816b3e6577eaa676ceb00a848f0fd65fe2adc29",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.15-rc3",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "ad8cccc24887655ebf0a3f459d38d1fb683df46a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Fix Intel Dollar Cove TI battery driver 32-bit build error",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f9bf352224d7d4612b55b8d0cd0eaa981a3246cf",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "userfaultfd: simplify fault handling",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "4a4be1ad3a6efea16c56615f31117590fd881358",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert \"vfs: Delete the associated dentry when deleting a file\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "30a0b95b1335e12efef89dd78518ed3e4a71a763",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.1-rc3",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "3906fe9bb7f1a2c8667ae54e967dc8690824f4ea",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.15-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "211ddde0823f1442e4ad052a2f30f050145ccada",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.18-rc2",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f075dce66c6039bb97b762b592a6db6d79e4350a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "scsi sg: remove incorrect scsi command checking logic",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "854f0912f813c3b7a4d35517658ca7f1511a69e2",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "ext4: make xattr char unsignedness in hash explicit",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "bf05bf16c76bb44ab5156223e1e58e26dfe30a88",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.12-rc8",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "2ccdd1b13c591d306f0401d98dedc4bdcd02b421",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.5-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "15ade5d2e7775667cf191cf2f94327a4889f8b9d",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.1-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d1a819a2ec2d3b5e6a8f8a9f67386bda0ad315bc",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "splice: teach splice pipe reading about empty pipe buffers",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "05d3ef8bba77c1b5f98d941d8b2d4aeab8118ef1",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.6-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f5b65348fd77839b50e79bc0a5e536832ea52d8d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "proc: fix missing final NUL in get_mm_cmdline() rewrite",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "e16c4790de39dc861b749674c2a9319507f6f64f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.605,
+      "subject": "Revert \"iommu/amd_iommu: Use CONFIG_DMA_DIRECT_OPS=y and dma_direct_{alloc,free}()\"",
+      "subject_score": 0.84,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "7af08140979a6e7e12b78c93b8625c8d25b084e2",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Revert \"gcov: clang: fix clang-11+ build\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "6d08b06e67cd117f6992c46611dfb4ce267cd71e",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.17-rc2",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a11e1d432b51f63ba698d044441284a661f01144",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert changes to convert to ->poll_mask() and aio IOCB_CMD_POLL",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "0e698dfa282211e414076f9dc7e83c1c288314fd",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.7-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "8a749fd1a8720d4619c91c8b6e7528c0a355c0aa",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.6-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "8bb7eca972ad531c9b149c0a51ab43a417385813",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.566,
+      "subject": "Linux 5.15",
+      "subject_score": 0.972,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "950b07c14e8c59444e2359f15fd70ed5112e11a0",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.657,
+      "subject": "Revert \"x86/apic: Include the LDR when clearing out APIC registers\"",
+      "subject_score": 0.991,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "42bd2af5950456d46fdaa91c3a8fb02e680f19f5",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "vfs: relax linkat() AT_EMPTY_PATH - aka flink() - requirements",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "b90cb1053190353cc30f0fef0ef1f378ccc063c5",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.0-rc3",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "5bebe8de19264946d398ead4e6c20c229454a552",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "mm/huge_memory: Fix initialization of huge zero folio",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "09a9639e56c01c7a00d6c0ca63f4c7c41abe075d",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.3-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "3d712546d8ba9f25cdf080d79f90482aa4231ed4",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "/proc/<pid>/cmdline: remove all the special cases",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d85a143b69abb4d7544227e26d12c4c7735ab27d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "xtensa: fix NOMMU build with lock_mm_and_find_vma() conversion",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "3754707bcc3e190e5dadc978d172b61e809cb3bd",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert \"memcg: enable accounting for file lock caches\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a50026bdb867c8caf9d29e18f9fe9e1390312619",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "iov_iter: get rid of 'copy_mc' flag",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "ba0c0cb56f227d9af9c19a276fac982c492c079f",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "remoteproc: k3-m4: use the proper dependencies",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "0fcfb00b28c0b7884635dacf38e46d60bf3d4eb1",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.16-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "7cc8f9c7146a5c2dad6e71653c4f69972e73df6b",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "mm: mmu_gather: prepare to gather encoded page pointers with flags",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "4525c8781ec0701ce824e8bd379ae1b129e26568",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "scsi: qla2xxx: remove incorrect sparse #ifdef",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "4b8fa1173cdc33a1cb53e4cac869b1b7aac917a9",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86-64: word-at-a-time: improve byte count calculations",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "e73f0f0ee7541171d89f2e2491130c7771ba58d3",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.14-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a425ac5365f6cb3cc47bf83e6bff0213c10445f7",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "gup: add warning if some caller would seem to want stack expansion",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "6fbc7275c7a9ba97877050335f290341a1fd8dbf",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.2-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "11ba468877bb23f28956a35e896356252d63c983",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.8-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "b04e217704b7f879c6b91222b066983a44a7a09f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.17-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "2585cf9dfaaddf00b069673f27bb3f8530e2039c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.16-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "a3b22b9f11d9fbc48b0291ea92259a5a810e9438",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.0-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "459e3a21535ae3c7a9a123650e54f5c882b8fcbf",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "gcc-9: properly declare the {pv,hv}clock_page storage",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a959dc88f9c8900296ccf13e2f3e1cbc555a8917",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Use __put_user_goto in __put_user_size() and unsafe_put_user()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "0da6e5fd6c3726723e275603426e09178940dace",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "gcc: disable '-Warray-bounds' for gcc-13 too",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "8124c8a6b35386f73523d27eacb71b5364a68c4c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.13-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "7d194c2100ad2a6dded545887d02754948ca5241",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.4-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "13694f0dbc077f28fcb613e7e37018d87997abb9",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.807,
+      "subject": "vfs: link_path_walk: move more of the name hashing into hash_name()",
+      "subject_score": 0.991,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "82f2b0b97b36ee3fcddf0f0780a9a0825d52fec3",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.15-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "6014bc27561f2cc63e0acc18adbc4ed810834e32",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86-64: make access_ok() independent of LAM",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "02f03c4206c1b2a7451d3b3546f86c9c783eac13",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Revert \"Revert \"ext4: make __ext4_get_inode_loc plug\"\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "7876320f88802b22d4e2daf7eb027dd14175a0f8",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.19-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "acb1872577b346bd15ab3a3f8dff780d6cca4b70",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.18-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "f5b7769eb0400ec5217a47e41148a9f816ca1f9f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.628,
+      "subject": "Revert \"debugfs: inode: debugfs_create_dir uses mode permission from parent\"",
+      "subject_score": 0.906,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a050ba1e7422f2cc60ff8bfde3f96d34d00cb585",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "mm/fault: convert remaining simple cases to lock_mm_and_find_vma()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "44720996e2d79e47d508b0abe99b931a726a3197",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "gcc-10: disable 'array-bounds' warning for now",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "c96618275234ad03d44eafe9f8844305bb44fda4",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Fix up more non-executable files marked executable",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "1c27f1fc1549f0e470429f5497a76ad28a37f21a",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "iov_iter: fix build issue due to possible type mis-match",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "ceaa837f96adb69c0df0397937cd74991d5d821a",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.2-rc8",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d528014517f2b0531862c02865b9d4c908019dc4",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Revert \".gitignore: ignore *.cover and *.mbx\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "06a0df4d1b8b13b551668e47b11fd7629033b7df",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "fbcon: remove now unusued 'softback_lines' cursor() argument",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "7111951b8d4973bda27ff663f2cf18b663d15b48",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.563,
+      "subject": "Linux 5.6",
+      "subject_score": 0.962,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "01cfb7937a9af2abb1136c7e89fbf3fd92952956",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "squashfs: be more careful about metadata corruption",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "018ab4fabddd94f1c96f3b59e180691b9e88d5d8",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "netfs: fix up netfs_inode_init() docbook comment",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d9c8e52ff9e84ff1a406330f9ea4de7c5eb40282",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "thermal: int340x: fix build on 32-bit targets",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d7fe75cbc23c7d225eee2ef04def239b6603dce7",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.788,
+      "subject": "tty: teach the n_tty ICANON case about the new \"cookie continuations\" too",
+      "subject_score": 0.934,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "1c24a186398f59c80adb9a967486b65c1423a59d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "fs: fd tables have to be multiples of BITS_PER_LONG",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "631e1a710c0489e083d4f1276f6de787a5cf08fb",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "vfs: link_path_walk: clarify and improve name hashing interface",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "99c001cb617df409dac275a059d6c3f187a2da7a",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "tracefs: Avoid using the ei->dentry pointer unnecessarily",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "c0842fbc1b18c7a044e6ff3e8fa78bfa822c7d1a",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "random32: move the pseudo-random 32-bit definitions to prandom.h",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "7da63b3d54aa7f1ad4b33a50d88edd623f29fded",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "x86: get rid of 'rtype' argument to __get_user_asm() macro",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "c500bee1c5b2f1d59b1081ac879d73268ab0ff17",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.14-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "431c1646e1f86b949fa3685efc50b660a364c2b6",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.11-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "a5e13c6df0e41702d2b2c77c8ad41677ebb065b3",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.12-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "c9c3395d5e3dcc6daee66c6908354d47bf98cb0c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.563,
+      "subject": "Linux 6.2",
+      "subject_score": 0.962,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "c698ca5278934c0ae32297a8725ced2e27585d7f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.16-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "9123e3a74ec7b934a4a099e98af6a61c2f80bbf5",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.9-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "8e41e0a575664d26bb87e012c39435c4c3914ed9",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Revert \"ACPICA: Events: Support fixed PCIe wake event\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d7852fbd0f0423937fa287a598bfde188bb68c22",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.744,
+      "subject": "access: avoid the RCU grace period for the temporary subjective credentials",
+      "subject_score": 0.915,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "5dc4c995db9eb45f6373a956eb1f69460e69e6d4",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.2-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "3d252160b818045f3a152b13756f6f37ca34639d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "fs/pipe: Read pipe->{head,tail} atomically outside pipe->mutex",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "cdbb65c4c7ead680ebe54f4f0d486e2847a500ea",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "squashfs metadata 2: electric boogaloo",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d888c83fcec75194a8a48ccd283953bdba7b2550",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "fs: fix fd table size alignment properly",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "b926f2adb0442090351dc8321ec1f99b22e372da",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.657,
+      "subject": "Revert \"vf/remap: return the amount of bytes actually deduplicated\"",
+      "subject_score": 0.991,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "021533194476035883300d60fbb3136426ac8ea5",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "Kconfig: Disable -Wstringop-overflow for GCC globally",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "0477e92881850d44910a7e94fc2c46f96faa131f",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.10-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "7de7de7ca0ae0fc70515ee3154af33af75edae2c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.661,
+      "subject": "Fix root mounting with no mount options",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "472e5b056f000a778abb41f1e443de58eb259783",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "pipe: remove pipe_wait() and fix wakeup race with splice",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "222974c6ec9d901f7ad13bbe6e505ec1f1d822d4",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "iommu: remove stale declaration left over by a merge conflict",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "19c329f6808995b142b3966301f217c831e7cf31",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.11-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "328b4ed93b69a6f2083d52f31a240a09e5de386a",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "x86: don't hash faulting address in oops printout",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "9828ed3f695a138f7add89fa2a186ababceb8006",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "module: error out early on concurrent load of the same module file",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "06c2afb862f9da8dc5efa4b6076a0e48c3fbaaa5",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.5-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "0fc810ae3ae110f9e2fcccce80fc8c8d62f97907",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "x86/uaccess: Avoid barrier_nospec() in 64-bit copy_from_user()",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "d810d4c27bf34c719243bab9feb0d843edc09fd7",
+      "prefix_score": 1.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.811,
+      "subject": "fs/pipe: do not open-code pipe head/tail logic in FIONREAD",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "6995e2de6891c724bfeb2db33d7b87775f913ad1",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.563,
+      "subject": "Linux 6.4",
+      "subject_score": 0.962,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "caa28984163cb63ea0be4cb8dbf05defdc7303f9",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "linux/types.h: reinstate \"__bitwise__\" macro for user space use",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "ae6650163c66a7eff1acd6eb8b0f752dcfa8eba5",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "loop: fix concurrent lo_open/lo_release",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.621,
+      "hash": "a3ac7917b73070010c05b4485b8582a6c9cd69b6",
+      "prefix_score": 0.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.624,
+      "subject": "Revert \"parport: daisy: use new parport device model\"",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "2e6e902d185027f8e3cb8b7305238f7e35d6a436",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 4.20-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "7e364e56293bb98cae1b55fd835f5991c4e96e7d",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.3-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "4477b39c32fdc03363affef4b11d48391e6dc9ff",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "minmax: add a few more MIN_T/MAX_T users",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "ac3fd01e4c1efce8f2c054cdeb2ddd2fc0fb150d",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.18-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "ac9a78681b921877518763ba0e89202254349d1b",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.4-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "cfb92440ee71adcc2105b0890bb01ac3cddb8507",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.17-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "47f15561b69e226bfc034e94ff6dbec51a4662af",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "drm: fix EDID struct for old ARM OABI format",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
+    },
+    {
+      "body_score": 0.379,
+      "hash": "fe07bfda2fb9cdef8a4d4008a409bb02f35f1bd8",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 5.12-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "bcf876870b95592b52519ed4aafcf9d95999bc9c",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.563,
+      "subject": "Linux 5.8",
+      "subject_score": 0.962,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "89be9a83ccf1f88522317ce02f854f30d6115c41",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.16-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.379,
+      "hash": "1613e604df0cd359cf2a7fbd9be7a0bcfacfabd0",
+      "prefix_score": 0.0,
+      "rationale_score": 0.622,
+      "style_fit": 0.576,
+      "subject": "Linux 6.10-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.379
+    },
+    {
+      "body_score": 0.621,
+      "hash": "e7304080e0e50d979ce9eaf694ad8283e2e539ea",
+      "prefix_score": 1.0,
+      "rationale_score": 0.378,
+      "style_fit": 0.774,
+      "subject": "cpumask: relax sanity checking constraints",
+      "subject_score": 1.0,
+      "trailer_score": 0.621
     }
   ],
-  "input_count": 100,
-  "score": 73.06,
+  "input_count": 1000,
+  "score": 68.11,
   "score_unit": "0-100"
 }

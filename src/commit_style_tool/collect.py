@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 from typing import Callable
 
@@ -10,11 +11,92 @@ RECORD_SEP = "\x1e"
 FIELD_SEP = "\x1f"
 TRAILER_SEP = "\x1d"
 TRAILER_KV_SEP = "\x1c"
+REPAIRABLE_GIT_ERROR_SNIPPETS = (
+    "from promisor remote",
+    "repo corruption",
+    "commit graph file but not in the object database",
+    "could not fetch",
+)
 
 
 def _emit(status: Callable[[str], None] | None, message: str) -> None:
     if status is not None:
         status(message)
+
+
+def _clone_to_cache(clone_url: str, checkout_path: Path) -> None:
+    run_command(
+        [
+            "git",
+            "clone",
+            "--no-checkout",
+            clone_url,
+            str(checkout_path),
+        ]
+    )
+
+
+def _is_remote_repo_source(repo_source: str) -> bool:
+    return (
+        repo_source.startswith("http://")
+        or repo_source.startswith("https://")
+        or repo_source.endswith(".git")
+    )
+
+
+def _is_cached_remote_repo(repo_path: Path, repo_source: str, cache_root: Path) -> bool:
+    if not _is_remote_repo_source(repo_source):
+        return False
+    return repo_path.resolve().is_relative_to(cache_root.resolve())
+
+
+def _is_repairable_git_error(error: RuntimeError) -> bool:
+    message = str(error).lower()
+    return any(snippet in message for snippet in REPAIRABLE_GIT_ERROR_SNIPPETS)
+
+
+def _repair_cached_repository(
+    repo_path: Path,
+    clone_url: str,
+    status: Callable[[str], None] | None = None,
+) -> Path:
+    _emit(status, "attempting cache repair with git fetch --refetch")
+    try:
+        run_command(["git", "-C", str(repo_path), "fetch", "--all", "--prune", "--tags", "--refetch"])
+        return repo_path
+    except RuntimeError:
+        _emit(status, "cache refetch failed; recloning repository cache")
+        if repo_path.exists():
+            shutil.rmtree(repo_path)
+        _clone_to_cache(clone_url, repo_path)
+        return repo_path
+
+
+def _build_git_log_command(
+    repo_path: Path,
+    username: str,
+    include_merges: bool,
+    limit: int | None,
+) -> list[str]:
+    pretty = (
+        "%x1e%H%x1f%an%x1f%ae%x1f%aI%x1f%cn%x1f%ce%x1f%P%x1f%s%x1f%b"
+        "%x1f%(trailers:only,separator=%x1d,key_value_separator=%x1c)"
+    )
+    cmd = [
+        "git",
+        "-C",
+        str(repo_path),
+        "log",
+        "--date=iso-strict",
+        f"--author={username}",
+        f"--pretty=format:{pretty}",
+        "--numstat",
+    ]
+    if not include_merges:
+        cmd.append("--no-merges")
+    if limit is not None and limit > 0:
+        cmd.extend(["-n", str(limit)])
+    return cmd
 
 
 def resolve_repository(
@@ -46,16 +128,7 @@ def resolve_repository(
 
     if not checkout_path.exists():
         _emit(status, f"cloning repository to cache: {clone_url}")
-        run_command(
-            [
-                "git",
-                "clone",
-                "--filter=blob:none",
-                "--no-checkout",
-                clone_url,
-                str(checkout_path),
-            ]
-        )
+        _clone_to_cache(clone_url, checkout_path)
     elif refresh:
         _emit(status, f"refreshing cached repository: {checkout_path}")
         run_command(["git", "-C", str(checkout_path), "fetch", "--all", "--prune", "--tags"])
@@ -170,29 +243,44 @@ def collect_commits(
         refresh=refresh,
         status=status,
     )
-
-    pretty = (
-        "%x1e%H%x1f%an%x1f%ae%x1f%aI%x1f%cn%x1f%ce%x1f%P%x1f%s%x1f%b"
-        "%x1f%(trailers:only,separator=%x1d,key_value_separator=%x1c)"
+    cmd = _build_git_log_command(
+        repo_path=repo_path,
+        username=username,
+        include_merges=include_merges,
+        limit=limit,
     )
 
-    cmd = [
-        "git",
-        "-C",
-        str(repo_path),
-        "log",
-        "--date=iso-strict",
-        f"--author={username}",
-        f"--pretty=format:{pretty}",
-        "--numstat",
-    ]
-    if not include_merges:
-        cmd.append("--no-merges")
-    if limit is not None and limit > 0:
-        cmd.extend(["-n", str(limit)])
-
     _emit(status, "running git log query for matching commits")
-    blob = run_command(cmd)
+    try:
+        blob = run_command(cmd)
+    except RuntimeError as error:
+        if not _is_cached_remote_repo(repo_path, repo_source, cache_root) or not _is_repairable_git_error(
+            error
+        ):
+            raise
+
+        _emit(status, "git log failed due to cache corruption; attempting repository repair")
+        try:
+            repo_path = _repair_cached_repository(repo_path, repo_source, status=status)
+        except RuntimeError as repair_error:
+            raise RuntimeError(
+                f"{error}\nRepository cache repair failed for {repo_path}: {repair_error}"
+            ) from repair_error
+
+        _emit(status, "retrying git log query after repository repair")
+        retry_cmd = _build_git_log_command(
+            repo_path=repo_path,
+            username=username,
+            include_merges=include_merges,
+            limit=limit,
+        )
+        try:
+            blob = run_command(retry_cmd)
+        except RuntimeError as retry_error:
+            raise RuntimeError(
+                f"{retry_error}\nRepository cache at {repo_path} is still unusable. "
+                "Delete the cache directory and rerun with network access."
+            ) from retry_error
     _emit(status, "parsing commit records from git log output")
     commits = parse_git_log_output(blob)
 
