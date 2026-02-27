@@ -15,6 +15,8 @@ The `generate` command runs all stages.
 
 ## Quick start
 
+Generate a Claude Code commit skill in the style of Linus Torvalds from the Linux repo:
+
 ```bash
 export ANTHROPIC_API_KEY=<your-key>
 
