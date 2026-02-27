@@ -1,5 +1,3 @@
-# commit-style-tool
-
 CLI pipeline to infer a commit-message style from a GitHub repo + author and package the result as a Claude-style skill.
 
 ## Repo structure
