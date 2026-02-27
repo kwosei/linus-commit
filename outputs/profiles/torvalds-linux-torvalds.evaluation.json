@@ -1,0 +1,219 @@
+{
+  "details": {
+    "expected_body_rate": 0.5,
+    "expected_prefix_rate": 0.26,
+    "expected_rationale_rate": 0.32,
+    "expected_trailer_rate": 0.5,
+    "subject_target": {
+      "p10": 14.0,
+      "p90": 68.10000000000001
+    }
+  },
+  "guideline_rule_count": 4,
+  "holdout_count": 20,
+  "holdout_scores": [
+    {
+      "body_score": 0.5,
+      "hash": "f83ec76bf285bea5727f478a68b894f5543ca76e",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.17-rc6",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "07e27ad16399afcd693be20211b0dfae63e0615f",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.17-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "c27c66afc449b80f3b4b84d123358c0248f2cf63",
+      "prefix_score": 1.0,
+      "rationale_score": 0.68,
+      "style_fit": 0.777,
+      "subject": "fs/pipe: Fix pipe_occupancy() with 16-bit indexes",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "1ca28333e464989113e518b452eaaccc79d865c8",
+      "prefix_score": 1.0,
+      "rationale_score": 0.32,
+      "style_fit": 0.723,
+      "subject": "x86: keep legacy generated vdso files around in .gitignore file",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "a5806cd506af5a7c19bcd596e4708b5c464bfd21",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.15-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "89be9a83ccf1f88522317ce02f854f30d6115c41",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.16-rc7",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "551d44200152cb26f75d2ef990aeb6185b7e37fd",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "default_gfp(): avoid using the \"newfangled\" __VA_OPT__ trick",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "9d7a0577c9db35c4cc52db90bc415ea248446472",
+      "prefix_score": 1.0,
+      "rationale_score": 0.32,
+      "style_fit": 0.714,
+      "subject": "gcc-15: disable '-Wunterminated-string-initialization' entirely for now",
+      "subject_score": 0.973,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "0f61b1860cc3f52aef9036d7235ed1f017632193",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.19-rc5",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "0af2f6be1b4281385b618cb86ad946eded089ac8",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.15-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "05e8d261a34e5c637e37be55c26e42cf5c75ee5c",
+      "prefix_score": 1.0,
+      "rationale_score": 0.32,
+      "style_fit": 0.723,
+      "subject": "gcc-15: add '__nonstring' markers to byte arrays",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "35149653ee29d925ea0c2b5ca0eacf0af32be34f",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "smb client: Add generated file to gitignore file",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "d0b3b7b22dfa1f4b515fd3a295b3fd958f9e81af",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.16-rc4",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "86731a2a651e58953fc949573895f2fa6d456841",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.16-rc3",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "ac71fabf15679fc7bc56c51bc92bd4b626564c37",
+      "prefix_score": 1.0,
+      "rationale_score": 0.32,
+      "style_fit": 0.723,
+      "subject": "gcc-15: work around sequence-point warning",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "ebf2bfec412ad293a0b118fb1a20a551088ebc9b",
+      "prefix_score": 1.0,
+      "rationale_score": 0.68,
+      "style_fit": 0.777,
+      "subject": "MAINTAINERS: mark bcachefs externally maintained",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "8f5ae30d69d7543eee0d70083daf4de8fe15d585",
+      "prefix_score": 0.7,
+      "rationale_score": 0.68,
+      "style_fit": 0.732,
+      "subject": "Linux 6.17-rc1",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "3d252160b818045f3a152b13756f6f37ca34639d",
+      "prefix_score": 1.0,
+      "rationale_score": 0.32,
+      "style_fit": 0.723,
+      "subject": "fs/pipe: Read pipe->{head,tail} atomically outside pipe->mutex",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "d5d45a7f26194460964eb5677a9226697f7b7fdd",
+      "prefix_score": 1.0,
+      "rationale_score": 0.32,
+      "style_fit": 0.723,
+      "subject": "gcc-15: make 'unterminated string initialization' just a warning",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    },
+    {
+      "body_score": 0.5,
+      "hash": "f2c61db29f277b9c80de92102fc532cc247495cd",
+      "prefix_score": 0.7,
+      "rationale_score": 0.32,
+      "style_fit": 0.678,
+      "subject": "Remove bcachefs core code",
+      "subject_score": 1.0,
+      "trailer_score": 0.5
+    }
+  ],
+  "input_count": 100,
+  "score": 73.06,
+  "score_unit": "0-100"
+}

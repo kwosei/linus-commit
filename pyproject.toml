@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "commit-style-tool"
+version = "0.1.0"
+description = "Generate commit-style skills from a GitHub repo and author"
+requires-python = ">=3.10"
+readme = "README.md"
+authors = [{ name = "commit-style-tool" }]
+dependencies = []
+
+[project.scripts]
+commit-style = "commit_style_tool.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
