@@ -13,6 +13,7 @@ from .utils import iso_now, read_json, slugify, write_json
 DEFAULT_MODEL_BY_PROVIDER = {
     "openai": "gpt-4.1-mini",
     "gemini": "gemini-2.5-flash",
+    "anthropic": "claude-opus-4-6",
 }
 
 
@@ -55,6 +56,20 @@ def _openai_chat_completion(api_key: str, model: str, messages: list[dict[str, s
         raise RuntimeError(f"OpenAI request failed with HTTP {exc.code}: {error_body}") from exc
     except URLError as exc:
         raise RuntimeError(f"OpenAI request failed: {exc}") from exc
+
+
+def _anthropic_messages(api_key: str, model: str, system_prompt: str, user_prompt: str) -> str:
+    import anthropic
+
+    client = anthropic.Anthropic(api_key=api_key)
+    message = client.messages.create(
+        model=model,
+        max_tokens=4096,
+        temperature=0.2,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_prompt}],
+    )
+    return message.content[0].text
 
 
 def _gemini_generate_content(
@@ -366,7 +381,7 @@ def synthesize_guidelines(
         write_json(output_path, normalized)
         return StageResult(path=str(output_path), record_count=len(normalized.get("rules", [])))
 
-    if provider_clean not in {"openai", "gemini"}:
+    if provider_clean not in {"openai", "gemini", "anthropic"}:
         raise ValueError(f"Unsupported provider: {provider}")
 
     model_name = model.strip() if isinstance(model, str) and model.strip() else DEFAULT_MODEL_BY_PROVIDER[provider_clean]
@@ -388,6 +403,13 @@ def synthesize_guidelines(
             normalized = _normalize_guidelines(payload, analysis, source="heuristic")
             write_json(output_path, normalized)
             return StageResult(path=str(output_path), record_count=len(normalized.get("rules", [])))
+    elif provider_clean == "anthropic":
+        api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+        if not api_key:
+            payload = _fallback_guidelines(analysis, username=username, repo=repo, reason="ANTHROPIC_API_KEY missing")
+            normalized = _normalize_guidelines(payload, analysis, source="heuristic")
+            write_json(output_path, normalized)
+            return StageResult(path=str(output_path), record_count=len(normalized.get("rules", [])))
     else:
         api_key = os.environ.get("GEMINI_API_KEY", "").strip() or os.environ.get("GOOGLE_API_KEY", "").strip()
         if not api_key:
@@ -405,6 +427,13 @@ def synthesize_guidelines(
         if provider_clean == "openai":
             response = _openai_chat_completion(api_key=api_key, model=model_name, messages=messages)
             raw_content = response["choices"][0]["message"]["content"]
+        elif provider_clean == "anthropic":
+            raw_content = _anthropic_messages(
+                api_key=api_key,
+                model=model_name,
+                system_prompt=system_prompt,
+                user_prompt=prompt,
+            )
         else:
             response = _gemini_generate_content(
                 api_key=api_key,

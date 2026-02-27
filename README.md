@@ -16,17 +16,23 @@ The `generate` command runs all stages.
 ## Quick start
 
 ```bash
+export ANTHROPIC_API_KEY=<your-key>
+
 python -m commit_style_tool generate \
   --repo torvalds/linux \
-  --username torvalds \
-  --provider gemini
+  --username torvalds
 ```
 
-Provider API keys:
+The default provider is Anthropic (`claude-opus-4-6`). Pass `--provider` to switch:
 
-- `--provider openai` uses `OPENAI_API_KEY`
-- `--provider gemini` uses `GEMINI_API_KEY` (or `GOOGLE_API_KEY`)
-- Missing key falls back to deterministic heuristics
+| `--provider` | Default model | API key env var |
+|---|---|---|
+| `anthropic` *(default)* | `claude-opus-4-6` | `ANTHROPIC_API_KEY` |
+| `openai` | `gpt-4.1-mini` | `OPENAI_API_KEY` |
+| `gemini` | `gemini-2.5-flash` | `GEMINI_API_KEY` or `GOOGLE_API_KEY` |
+| `none` | — | falls back to deterministic heuristics |
+
+Use `--model` to override the default for any provider.
 
 ## Example output layout
 
@@ -51,7 +57,8 @@ outputs/
 ## Install as a local command
 
 ```bash
-pip install -e .
+uv venv && uv pip install -e .
+source .venv/bin/activate
 commit-style --help
 ```
 

@@ -9,7 +9,7 @@ description = "Generate commit-style skills from a GitHub repo and author"
 requires-python = ">=3.10"
 readme = "README.md"
 authors = [{ name = "commit-style-tool" }]
-dependencies = []
+dependencies = ["anthropic>=0.40.0"]
 
 [project.scripts]
 commit-style = "commit_style_tool.cli:main"
