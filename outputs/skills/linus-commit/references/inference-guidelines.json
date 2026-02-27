@@ -1,185 +1,117 @@
 {
   "anti_rules": [
     {
-      "instruction": "Do not use past tense in the subject line (e.g., 'Fixed bug' or 'Added feature').",
-      "rationale": "The imperative proxy rate is ~40%, and subjects consistently use imperative or descriptive present forms like 'fix', 'avoid', 'error out', 'deal with'."
+      "instruction": "Avoid vague subjects that describe effort instead of behavior.",
+      "rationale": "The style tends to emphasize concrete technical effect."
     },
     {
-      "instruction": "Do not use generic subjects like 'Bug fix' or 'Update code' without specifying the subsystem or nature of the change.",
-      "rationale": "Subjects are specific and descriptive, often with a subsystem prefix and a clear indication of what the commit does."
-    },
-    {
-      "instruction": "Do not write terse one-line bodies for non-trivial changes.",
-      "rationale": "Non-trivial commits have substantial bodies (median ~990 characters) with thorough explanations."
-    },
-    {
-      "instruction": "Do not omit attribution trailers (Reported-by, Tested-by, etc.) when others contributed to identifying or validating the fix.",
-      "rationale": "Torvalds consistently credits reporters, testers, and suggesters via trailers."
+      "instruction": "Avoid filler body text that repeats the subject without rationale.",
+      "rationale": "Body content is most useful when it adds causal context."
     }
   ],
   "confidence": {
     "notes": [
-      "The ~50% capitalization rate suggests no strict rule on capitalizing the first word of the subject; it depends on whether a prefix is present.",
-      "The imperative proxy rate of ~40% indicates Torvalds uses a mix of imperative ('fix', 'avoid') and descriptive ('deal with', 'error out early') forms, not strictly imperative.",
-      "About 38% of commits have no body at all, which includes merge commits and version tags\u2014these are structurally different from authored patches.",
-      "The high Cc count (958) likely includes many merge commits where Cc trailers are inherited from the merged patches.",
-      "Sample size of 7 detailed commits limits confidence on some stylistic patterns; broader patterns inferred from aggregate statistics."
+      "Generated with deterministic fallback heuristics.",
+      "Fallback reason: Connection error."
     ],
-    "score": 0.82
+    "score": 0.66
   },
   "examples": [
     {
-      "good_body": "The atomisp_mrfld_power() function isn't actually ever called, because\nthe two call-sites have commented out the use because it breaks on some\nplatforms...\n\nRather than commenting out the use entirely, just disable it\nsemantically instead (using a \"0 &&\" construct)...\n\nI really don't want my builds to have any warnings that can then hide\nreal issues.\n\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "good_body": "",
+      "good_subject": "Linux 6.9",
+      "source_commit_id": "a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6",
+      "why": "Representative commit selected from the analyzed corpus."
+    },
+    {
+      "good_body": "The atomisp_mrfld_power() function isn't actually ever called, because\nthe two call-sites have commented out the use because it breaks on some\nplatforms.  That results in:\n\n  drivers/staging/media/atomisp/pci/atomisp_v4l2.c:764:12: warning: \u2018atomisp_mrfld_power\u2019 defined but not used [-Wunused-function]\n    764 | static int atomisp_mrfld_power(struct atomisp_device *isp, bool enable)\n        |            ^~~~~~~~~~~~~~~~~~~\n\nduring the build.\n\nRather than commenting out the use entirely, just disable it\nsemantically instead (using a \"0 &&\" construct), leaving the call in\nplace from a syntax standpoint, and avoiding the warning.\n\nI really don't want my builds to have any warnings that can then hide\nreal issues.\n\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
       "good_subject": "atomisp: avoid warning about unused function",
       "source_commit_id": "6929f71e46bdddbf1c4d67c2728648176c67c555",
-      "why": "Demonstrates lowercase prefix, concise subject, clear problem statement, rationale for the approach, and personal motivation. Includes Signed-off-by."
+      "why": "Representative commit selected from the analyzed corpus."
     },
     {
-      "good_body": "The lockdep asserts for the new follow_pfnmap() API \"knows\" that a\npfnmap always has a vma->vm_file...\n\nSo this codepath does actually need to check for vm_file being NULL.\n\nReported-by: Jann Horn <jannh@google.com>\nFixes: 6da8e9634bb7 (\"mm: new follow_pfnmap API\")\nCc: Peter Xu <peterx@redhat.com>\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
-      "good_subject": "mm: fix follow_pfnmap API lockdep assert",
-      "source_commit_id": "b1b46751671be5a426982f037a47ae05f37ff80b",
-      "why": "Shows proper use of subsystem prefix, imperative 'fix', concise explanation of the edge case, and complete trailers including Reported-by, Fixes, Cc, and Signed-off-by."
-    },
-    {
-      "good_body": "It turns out that udev under certain circumstances will concurrently try\nto load the same modules over-and-over excessively...",
+      "good_body": "It turns out that udev under certain circumstances will concurrently try\nto load the same modules over-and-over excessively.  This isn't a kernel\nbug, but it ends up affecting the kernel, to the point that under\ncertain circumstances we can fail to boot, because the kernel uses a lot\nof memory to read all the module data all at once.\n\nNote that it isn't a memory leak, it's just basically a thundering herd\nproblem happening at bootup with a lot of CPUs, with the worst cases\nthen being pretty bad.\n\nAdmittedly the worst situations are somewhat contrived: lots and lots of\nCPUs, not a lot of memory, and KASAN enabled to make it all slower and\nas such (unintentionally) exacerbate the problem.\n\nLuis explains: [1]\n\n \"My best assessment of the situation is that each CPU in udev ends up\n  triggering a load of duplicate set of modules, not just one, but *a\n  lot*. Not sure what heuristics udev uses to load a set of modules per\n  CPU.\"\n\nPetr Pavlu chimes in: [2]\n\n \"My understanding is that udev workers are forked. An initial kmod\n  context is created by the main udevd process but no sharing happens\n  after the fork. It means that the mentioned memory pool logic doesn't\n  really kick in.\n\n  Multiple parallel load requests come from multiple udev workers, for\n  instance, each handling an udev event for one CPU device and making\n  the exactly same requests as all others are doing at the same time.\n\n  The optimization idea would be to recognize these duplicate requests\n  at the udevd/kmod level and converge them\"\n\nNote that module loading has tried to mitigate this issue before, see\nfor example commit 064f4536d139 (\"module: avoid allocation if module is\nalready present and ready\"), which has a few ASCII graphs on memory use\ndue to this same issue.\n\nHowever, while that noticed that the module was already loaded, and\nexited with an error early before spending any more time on setting up\nthe module, it didn't handle the case of multiple concurrent module\nloads all being active - but not complete - at the same time.\n\nYes, one of them will eventually win the race and finalize its copy, and\nthe others will then notice that the module already exists and error\nout, but while this all happens, we have tons of unnecessary concurrent\nwork being done.\n\nAgain, the real fix is for udev to not do that (maybe it should use\nthreads instead of fork, and have actual shared data structures and not\ncause duplicate work). That real fix is apparently not trivial.\n\nBut it turns out that the kernel already has a pretty good model for\ndealing with concurrent access to the same file: the i_writecount of the\ninode.\n\nIn fact, the module loading already indirectly uses 'i_writecount' ,\nbecause 'kernel_file_read()' will in fact do\n\n\tret = deny_write_access(file);\n\tif (ret)\n\t\treturn ret;\n\t...\n\tallow_write_access(file);\n\naround the read of the file data.  We do not allow concurrent writes to\nthe file, and return -ETXTBUSY if the file was open for writing at the\nsame time as the module data is loaded from it.\n\nAnd the solution to the reader concurrency problem is to simply extend\nthis \"no concurrent writers\" logic to simply be \"exclusive access\".\n\nNote that \"exclusive\" in this context isn't really some absolute thing:\nit's only exclusion from writers and from other \"special readers\" that\ndo this writer denial.  So we simply introduce a variation of that\n\"deny_write_access()\" logic that not only denies write access, but also\nrequires that this is the _only_ such access that denies write access.\n\nWhich means that you can't start loading a module that is already being\nloaded as a module by somebody else, or you will get the same -ETXTBSY\nerror that you would get if there were writers around.\n\n[ It also means that you can't try to load a currently executing\n  executable as a module, for the same reason: executables do that same\n  \"deny_write_access()\" thing, and that's obviously where the whole\n  ETXTBSY logic traditionally came from.\n\n  This is not a problem for kernel modules, since the set of normal\n  executable files and kernel module files is entirely disjoint. ]\n\nThis new function is called \"exclusive_deny_write_access()\", and the\nimplementation is trivial, in that it's just an atomic decrement of\ni_writecount if it was 0 before.\n\nTo use that new exclusivity check, all we then do is wrap the module\nloading with that exclusive_deny_write_access()() / allow_write_access()\npair.  The actual patch is a bit bigger than that, because we want to\nsurround not just the \"load file data\" part, but the whole module setup,\nto get maximum exclusion.\n\nSo this ends up splitting up \"finit_module()\" into a few helper\nfunctions to make it all very clear and legible.\n\nIn Luis' test-case (bringing up 255 vcpu's in a virtual machine [3]),\nthe \"wasted vmalloc\" space (ie module data read into a vmalloc'ed area\nin order to be loaded as a module, but then discarded because somebody\nelse loaded the same module instead) dropped from 1.8GiB to 474kB.  Yes,\nthat's gigabytes to kilobytes.\n\nIt doesn't drop completely to zero, because even with this change, you\ncan still end up having completely serial pointless module loads, where\none udev process has loaded a module fully (and thus the kernel has\nreleased that exclusive lock on the module file), and then another udev\nprocess tries to load the same module again.\n\nSo while we cannot fully get rid of the fundamental bug in user space,\nwe _can_ get rid of the excessive concurrent thundering herd effect.\n\nA couple of final side notes on this all:\n\n - This tweak only affects the \"finit_module()\" system call, which gives\n   the kernel a file descriptor with the module data.\n\n   You can also just feed the module data as raw data from user space\n   with \"init_module()\" (note the lack of 'f' at the beginning), and\n   obviously for that case we do _not_ have any \"exclusive read\" logic.\n\n   So if you absolutely want to do things wrong in user space, and try\n   to load the same module multiple times, and error out only later when\n   the kernel ends up saying \"you can't load the same module name\n   twice\", you can still do that.\n\n   And in fact, some distros will do exactly that, because they will\n   uncompress the kernel module data in user space before feeding it to\n   the kernel (mainly because they haven't started using the new kernel\n   side decompression yet).\n\n   So this is not some absolute \"you can't do concurrent loads of the\n   same module\". It's literally just a very simple heuristic that will\n   catch it early in case you try to load the exact same module file at\n   the same time, and in that case avoid a potentially nasty situation.\n\n - There is another user of \"deny_write_access()\": the verity code that\n   enables fs-verity on a file (the FS_IOC_ENABLE_VERITY ioctl).\n\n   If you use fs-verity and you care about verifying the kernel modules\n   (which does make sense), you should do it *before* loading said\n   kernel module. That may sound obvious, but now the implementation\n   basically requires it. Because if you try to do it concurrently, the\n   kernel may refuse to load the module file that is being set up by the\n   fs-verity code.\n\n - This all will obviously mean that if you insist on loading the same\n   module in parallel, only one module load will succeed, and the others\n   will return with an error.\n\n   That was true before too, but what is different is that the -ETXTBSY\n   error can be returned *before* the success case of another process\n   fully loading and instantiating the module.\n\n   Again, that might sound obvious, and it is indeed the whole point of\n   the whole change: we are much quicker to notice the whole \"you're\n   already in the process of loading this module\".\n\n   So it's very much intentional, but it does mean that if you just\n   spray the kernel with \"finit_module()\", and expect that the module is\n   immediately loaded afterwards without checking the return value, you\n   are doing something horribly horribly wrong.\n\n   I'd like to say that that would never happen, but the whole _reason_\n   for this commit is that udev is currently doing something horribly\n   horribly wrong, so ...\n\nLink: https://lore.kernel.org/all/ZEGopJ8VAYnE7LQ2@bombadil.infradead.org/ [1]\nLink: https://lore.kernel.org/all/23bd0ce6-ef78-1cd8-1f21-0e706a00424a@suse.com/ [2]\nLink: https://lore.kernel.org/lkml/ZG%2Fa+nrt4%2FAAUi5z@bombadil.infradead.org/ [3]\nCc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>\nCc: Lucas De Marchi <lucas.demarchi@intel.com>\nCc: Petr Pavlu <petr.pavlu@suse.com>\nTested-by: Luis Chamberlain <mcgrof@kernel.org>\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
       "good_subject": "module: error out early on concurrent load of the same module file",
       "source_commit_id": "9828ed3f695a138f7add89fa2a186ababceb8006",
-      "why": "Exemplifies a thorough, narrative-style body with extensive context, quotes from other developers, technical detail about the solution, caveats, and comprehensive trailers."
+      "why": "Representative commit selected from the analyzed corpus."
     }
   ],
   "format": {
-    "body": "Multi-paragraph prose explaining the problem, context, rationale, and approach. May include quoted text from others, inline code references, and bracketed side notes. Separated from subject by a blank line.",
-    "subject": "<optional-subsystem-prefix>: <lowercase imperative/descriptive summary>",
-    "trailers": "Blank line before trailers. Common order: Link, Reported-by, Reported-and-tested-by, Fixes, Cc, Tested-by, Acked-by, Reviewed-by, Signed-off-by (author's Signed-off-by typically last)."
+    "body": "Explain why, then key constraints or caveats.",
+    "subject": "[optional subsystem:] imperative summary",
+    "trailers": "Include only when needed for traceability."
   },
-  "generated_at": "2026-02-27T11:48:59+00:00",
+  "generated_at": "2026-02-27T12:15:27+00:00",
   "rules": [
     {
       "evidence_commit_ids": [
-        "b1b46751671be5a426982f037a47ae05f37ff80b",
+        "a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6",
         "6929f71e46bdddbf1c4d67c2728648176c67c555",
-        "614d13462daef9bf6ac735744b5835a18cbfd19c",
-        "9828ed3f695a138f7add89fa2a186ababceb8006"
+        "9828ed3f695a138f7add89fa2a186ababceb8006",
+        "b1b46751671be5a426982f037a47ae05f37ff80b"
       ],
       "id": "rule-1",
-      "instruction": "Use a lowercase subsystem prefix followed by a colon and space when the commit is scoped to a specific subsystem (e.g., 'mm:', 'x86:', 'vfs:').",
-      "rationale": "About 48% of subjects use a prefix, with common ones being 'mm', 'x86', 'tty', 'vfs', 'pipe', etc. The prefix is lowercase and followed by a colon."
-    },
-    {
-      "evidence_commit_ids": [
-        "6929f71e46bdddbf1c4d67c2728648176c67c555",
-        "b1b46751671be5a426982f037a47ae05f37ff80b",
-        "614d13462daef9bf6ac735744b5835a18cbfd19c"
-      ],
-      "id": "rule-2",
-      "instruction": "Keep the subject line concise, typically under 72 characters, with a median around 44 characters.",
-      "rationale": "The median subject length is 44 characters and the mean is ~39 characters, indicating a preference for brevity."
-    },
-    {
-      "evidence_commit_ids": [
-        "9828ed3f695a138f7add89fa2a186ababceb8006",
-        "b1b46751671be5a426982f037a47ae05f37ff80b",
-        "6929f71e46bdddbf1c4d67c2728648176c67c555"
-      ],
-      "id": "rule-3",
-      "instruction": "Write the body as a narrative explanation of the problem, the reasoning behind the fix, and the approach taken, using natural prose paragraphs.",
-      "rationale": "Bodies are typically multi-paragraph prose (median 5 paragraphs) that explain context, root cause, and rationale in a conversational but technical style."
-    },
-    {
-      "evidence_commit_ids": [
-        "6929f71e46bdddbf1c4d67c2728648176c67c555",
-        "9828ed3f695a138f7add89fa2a186ababceb8006",
-        "b1b46751671be5a426982f037a47ae05f37ff80b",
-        "614d13462daef9bf6ac735744b5835a18cbfd19c"
-      ],
-      "id": "rule-4",
-      "instruction": "Always include a 'Signed-off-by' trailer with the author's name and email.",
-      "rationale": "69% of commits include Signed-off-by, and virtually all commits with a body include it. It is the standard sign-off for kernel commits."
-    },
-    {
-      "evidence_commit_ids": [
-        "9828ed3f695a138f7add89fa2a186ababceb8006",
-        "b1b46751671be5a426982f037a47ae05f37ff80b"
-      ],
-      "id": "rule-5",
-      "instruction": "Include 'Cc:' trailers to notify relevant maintainers and developers.",
-      "rationale": "Cc is the most common trailer (958 occurrences across 1000 commits), used extensively to notify stakeholders."
-    },
-    {
-      "evidence_commit_ids": [
-        "b1b46751671be5a426982f037a47ae05f37ff80b"
-      ],
-      "id": "rule-6",
-      "instruction": "Include 'Reported-by:' and 'Fixes:' trailers when the commit addresses a reported bug or regression.",
-      "rationale": "Reported-by appears 234 times and Fixes 176 times, indicating consistent attribution of bug reporters and linking to the offending commit."
-    },
-    {
-      "evidence_commit_ids": [
-        "b1b46751671be5a426982f037a47ae05f37ff80b",
-        "6929f71e46bdddbf1c4d67c2728648176c67c555",
-        "9828ed3f695a138f7add89fa2a186ababceb8006",
-        "614d13462daef9bf6ac735744b5835a18cbfd19c"
-      ],
-      "id": "rule-7",
-      "instruction": "Do not capitalize the first word after a subsystem prefix (use lowercase for the description part).",
-      "rationale": "When a prefix is present, the word after the colon is typically lowercase (e.g., 'mm: fix', 'module: error out', 'atomisp: avoid')."
+      "instruction": "Write a concise, technical subject line that focuses on the behavioral change.",
+      "rationale": "Observed median subject length is about 44.0 characters."
     },
     {
       "evidence_commit_ids": [
         "a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6",
-        "b65054597872ce3aefbc6a666385eabdf9e288da"
-      ],
-      "id": "rule-8",
-      "instruction": "Omit the body for trivial or version-bump commits (e.g., release tags).",
-      "rationale": "About 38% of commits have no body, and version tag commits like 'Linux 6.9' and 'Linux 5.10-rc6' have empty bodies and no trailers."
-    },
-    {
-      "evidence_commit_ids": [
-        "9828ed3f695a138f7add89fa2a186ababceb8006",
-        "6929f71e46bdddbf1c4d67c2728648176c67c555",
-        "32115734c0ed8b463d1020e8da47968735f882c0"
-      ],
-      "id": "rule-9",
-      "instruction": "Explain the 'why' thoroughly in the body, not just the 'what', including background context and side effects.",
-      "rationale": "Torvalds' commit bodies frequently include extensive rationale, quoting others, explaining edge cases, and noting caveats. The rationale_rate is 37.8%."
-    },
-    {
-      "evidence_commit_ids": [
-        "32115734c0ed8b463d1020e8da47968735f882c0",
-        "9828ed3f695a138f7add89fa2a186ababceb8006"
-      ],
-      "id": "rule-10",
-      "instruction": "Use bracketed side notes (e.g., '[ Side note: ... ]') for tangential but relevant information.",
-      "rationale": "Torvalds uses square-bracket asides within commit bodies to add supplementary context without disrupting the main narrative flow."
-    },
-    {
-      "evidence_commit_ids": [
         "6929f71e46bdddbf1c4d67c2728648176c67c555",
         "9828ed3f695a138f7add89fa2a186ababceb8006",
         "b1b46751671be5a426982f037a47ae05f37ff80b"
       ],
-      "id": "rule-11",
-      "instruction": "Do not end the subject line with a period.",
-      "rationale": "None of the sample subjects end with a period, consistent with standard kernel commit style."
+      "id": "rule-2",
+      "instruction": "Start the actionable part of the subject with an imperative verb.",
+      "rationale": "The corpus shows frequent imperative-leading subjects (proxy rate 0.40)."
+    },
+    {
+      "evidence_commit_ids": [
+        "a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6",
+        "6929f71e46bdddbf1c4d67c2728648176c67c555",
+        "9828ed3f695a138f7add89fa2a186ababceb8006",
+        "b1b46751671be5a426982f037a47ae05f37ff80b"
+      ],
+      "id": "rule-3",
+      "instruction": "Use a subsystem prefix (`subsystem: summary`) when the change is scoped.",
+      "rationale": "Prefix usage appears common (rate 0.48)."
+    },
+    {
+      "evidence_commit_ids": [
+        "a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6",
+        "6929f71e46bdddbf1c4d67c2728648176c67c555",
+        "9828ed3f695a138f7add89fa2a186ababceb8006",
+        "b1b46751671be5a426982f037a47ae05f37ff80b"
+      ],
+      "id": "rule-4",
+      "instruction": "Add a body paragraph that explains why the change is needed before implementation detail.",
+      "rationale": "Most commits include a body; the style usually carries rationale in prose."
+    },
+    {
+      "evidence_commit_ids": [
+        "a38297e3fb012ddfa7ce0321a7e5a8daeb1872b6",
+        "6929f71e46bdddbf1c4d67c2728648176c67c555",
+        "9828ed3f695a138f7add89fa2a186ababceb8006",
+        "b1b46751671be5a426982f037a47ae05f37ff80b"
+      ],
+      "id": "rule-5",
+      "instruction": "Include trailers only when they add review, fix, or sign-off traceability.",
+      "rationale": "Trailer usage is non-trivial (rate 0.62)."
     }
   ],
-  "source": "anthropic",
+  "source": "heuristic",
   "style_id": "1000-commits-style",
   "tone": {
     "avoid": [
-      "Overly formal or bureaucratic language",
-      "Vague descriptions without technical specifics",
-      "Unnecessary jargon without explanation",
-      "Leaving out the 'why' behind a change"
+      "Marketing language",
+      "Vague intent statements",
+      "Unqualified certainty when uncertain"
     ],
     "do": [
-      "Explain the root cause and reasoning in detail",
-      "Use conversational but technically precise language",
-      "Quote relevant context from mailing list discussions",
-      "Mention caveats, edge cases, and limitations explicitly",
-      "Use emphatic language when something is important (e.g., 'horribly horribly wrong')",
-      "Include concrete data and measurements when available"
+      "State concrete effects",
+      "Call out constraints and regressions",
+      "Use plain technical language"
     ],
-    "summary": "Direct, technically precise, conversational, and opinionated. Explains reasoning thoroughly with a confident, sometimes blunt voice. Not afraid to editorialize or express frustration with bad patterns."
+    "summary": "Technical, direct, and behavior-focused."
   }
 }
