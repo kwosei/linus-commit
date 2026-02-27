@@ -1,0 +1,296 @@
+{
+  "body": {
+    "char_length": {
+      "count": 50,
+      "max": 4432,
+      "mean": 1149.24,
+      "median": 977.0,
+      "min": 119,
+      "p10": 382.2,
+      "p90": 2006.6000000000001
+    },
+    "paragraph_count": {
+      "count": 50,
+      "max": 18,
+      "mean": 6.42,
+      "median": 5.0,
+      "min": 2,
+      "p10": 3.0,
+      "p90": 12.100000000000001
+    },
+    "present_rate": 0.5
+  },
+  "changes": {
+    "additions": {
+      "count": 100,
+      "max": 13013,
+      "mean": 155.31,
+      "median": 1.0,
+      "min": 0,
+      "p10": 1.0,
+      "p90": 14.200000000000017
+    },
+    "deletions": {
+      "count": 100,
+      "max": 117483,
+      "mean": 1339.86,
+      "median": 1.0,
+      "min": 0,
+      "p10": 1.0,
+      "p90": 21.200000000000017
+    },
+    "files_changed": {
+      "count": 100,
+      "max": 6673,
+      "mean": 82.61,
+      "median": 1.0,
+      "min": 1,
+      "p10": 1.0,
+      "p90": 4.0
+    }
+  },
+  "generated_at": "2026-02-27T02:22:29+00:00",
+  "record_count": 100,
+  "samples": [
+    {
+      "additions": 1,
+      "body": "",
+      "deletions": 1,
+      "files_changed": 1,
+      "hash": "05f7e89ab9731565d8a62e3b5d1ec206485eeb0b",
+      "subject": "Linux 6.19",
+      "trailers": {}
+    },
+    {
+      "additions": 0,
+      "body": "bcachefs was marked 'externally maintained' in 6.17 but the code\nremained to make the transition smoother.\n\nIt's now a DKMS module, making the in-kernel code stale, so remove\nit to avoid any version confusion.\n\nLink: https://lore.kernel.org/linux-bcachefs/yokpt2d2g2lluyomtqrdvmkl3amv3kgnipmenobkpgx537kay7@xgcgjviv3n7x/T/\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "deletions": 117483,
+      "files_changed": 284,
+      "hash": "f2c61db29f277b9c80de92102fc532cc247495cd",
+      "subject": "Remove bcachefs core code",
+      "trailers": {
+        "Link": [
+          "https://lore.kernel.org/linux-bcachefs/yokpt2d2g2lluyomtqrdvmkl3amv3kgnipmenobkpgx537kay7@xgcgjviv3n7x/T/"
+        ],
+        "Signed-off-by": [
+          "Linus Torvalds <torvalds@linux-foundation.org>"
+        ]
+      }
+    },
+    {
+      "additions": 45,
+      "body": "pipe_readable(), pipe_writable(), and pipe_poll() can read \"pipe->head\"\nand \"pipe->tail\" outside of \"pipe->mutex\" critical section. When the\nhead and the tail are read individually in that order, there is a window\nfor interruption between the two reads in which both the head and the\ntail can be updated by concurrent readers and writers.\n\nOne of the problematic scenarios observed with hackbench running\nmultiple groups on a large server on a particular pipe inode is as\nfollows:\n\n    pipe->head = 36\n    pipe->tail = 36\n\n    hackbench-118762  [057] .....  1029.550548: pipe_write: *wakes up: pipe not full*\n    hackbench-118762  [057] .....  1029.550548: pipe_write: head: 36 -> 37 [tail: 36]\n    hackbench-118762  [057] .....  1029.550548: pipe_write: *wake up next reader 118740*\n    hackbench-118762  [057] .....  1029.550548: pipe_write: *wake up next writer 118768*\n\n    hackbench-118768  [206] .....  1029.55055X: pipe_write: *writer wakes up*\n    hackbench-118768  [206] .....  1029.55055X: pipe_write: head = READ_ONCE(pipe->head) [37]\n    ... CPU 206 interrupted (exact wakeup was not traced but 118768 did read head at 37 in traces)\n\n    hackbench-118740  [057] .....  1029.550558: pipe_read:  *reader wakes up: pipe is not empty*\n    hackbench-118740  [057] .....  1029.550558: pipe_read:  tail: 36 -> 37 [head = 37]\n    hackbench-118740  [057] .....  1029.550559: pipe_read:  *pipe is empty; wakeup writer 118768*\n    hackbench-118740  [057] .....  1029.550559: pipe_read:  *sleeps*\n\n    hackbench-118766  [185] .....  1029.550592: pipe_write: *New writer comes in*\n    hackbench-118766  [185] .....  1029.550592: pipe_write: head: 37 -> 38 [tail: 37]\n    hackbench-118766  [185] .....  1029.550592: pipe_write: *wakes up reader 118766*\n\n    hackbench-118740  [185] .....  1029.550598: pipe_read:  *reader wakes up; pipe not empty*\n    hackbench-118740  [185] .....  1029.550599: pipe_read:  tail: 37 -> 38 [head: 38]\n    hackbench-118740  [185] .....  1029.550599: pipe_read:  *pipe is empty*\n    hackbench-118740  [185] .....  1029.550599: pipe_read:  *reader sleeps; wakeup writer 118768*\n\n    ... CPU 206 switches back to writer\n    hackbench-118768  [206] .....  1029.550601: pipe_write: tail = READ_ONCE(pipe->tail) [38]\n    hackbench-118768  [206] .....  1029.550601: pipe_write: pipe_full()? (u32)(37 - 38) >= 16? Yes\n    hackbench-118768  [206] .....  1029.550601: pipe_write: *writer goes back to sleep*\n\n    [ Tasks 118740 and 118768 can then indefinitely wait on each other. ]\n\nThe unsigned arithmetic in pipe_occupancy() wraps around when\n\"pipe->tail > pipe->head\" leading to pipe_full() returning true despite\nthe pipe being empty.\n\nThe case of genuine wraparound of \"pipe->head\" is handled since pipe\nbuffer has data allowing readers to make progress until the pipe->tail\nwraps too after which the reader will wakeup a sleeping writer, however,\nmistaking the pipe to be full when it is in fact empty can lead to\nreaders and writers waiting on each other indefinitely.\n\nThis issue became more problematic and surfaced as a hang in hackbench\nafter the optimization in commit aaec5a95d596 (\"pipe_read: don't wake up\nthe writer if the pipe is still full\") significantly reduced the number\nof spurious wakeups of writers that had previously helped mask the\nissue.\n\nTo avoid missing any updates between the reads of \"pipe->head\" and\n\"pipe->write\", unionize the two with a single unsigned long\n\"pipe->head_tail\" member that can be loaded atomically.\n\nUsing \"pipe->head_tail\" to read the head and the tail ensures the\nlockless checks do not miss any updates to the head or the tail and\nsince those two are only updated under \"pipe->mutex\", it ensures that\nthe head is always ahead of, or equal to the tail resulting in correct\ncalculations.\n\n  [ prateek: commit log, testing on x86 platforms. ]\n\nReported-and-debugged-by: Swapnil Sapkal <swapnil.sapkal@amd.com>\nCloses: https://lore.kernel.org/lkml/e813814e-7094-4673-bc69-731af065a0eb@amd.com/\nReported-by: Alexey Gladkov <legion@kernel.org>\nCloses: https://lore.kernel.org/all/Z8Wn0nTvevLRG_4m@example.org/\nFixes: 8cefc107ca54 (\"pipe: Use head and tail pointers for the ring, not cursor and length\")\nTested-by: Swapnil Sapkal <swapnil.sapkal@amd.com>\nReviewed-by: Oleg Nesterov <oleg@redhat.com>\nTested-by: Alexey Gladkov <legion@kernel.org>\nSigned-off-by: K Prateek Nayak <kprateek.nayak@amd.com>\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "deletions": 13,
+      "files_changed": 2,
+      "hash": "3d252160b818045f3a152b13756f6f37ca34639d",
+      "subject": "fs/pipe: Read pipe->{head,tail} atomically outside pipe->mutex",
+      "trailers": {
+        "Closes": [
+          "https://lore.kernel.org/lkml/e813814e-7094-4673-bc69-731af065a0eb@amd.com/",
+          "https://lore.kernel.org/all/Z8Wn0nTvevLRG_4m@example.org/"
+        ],
+        "Fixes": [
+          "8cefc107ca54 (\"pipe: Use head and tail pointers for the ring, not cursor and length\")"
+        ],
+        "Reported-and-debugged-by": [
+          "Swapnil Sapkal <swapnil.sapkal@amd.com>"
+        ],
+        "Reported-by": [
+          "Alexey Gladkov <legion@kernel.org>"
+        ],
+        "Reviewed-by": [
+          "Oleg Nesterov <oleg@redhat.com>"
+        ],
+        "Signed-off-by": [
+          "K Prateek Nayak <kprateek.nayak@amd.com>",
+          "Linus Torvalds <torvalds@linux-foundation.org>"
+        ],
+        "Tested-by": [
+          "Swapnil Sapkal <swapnil.sapkal@amd.com>",
+          "Alexey Gladkov <legion@kernel.org>"
+        ]
+      }
+    },
+    {
+      "additions": 49,
+      "body": "The fix to atomically read the pipe head and tail state when not holding\nthe pipe mutex has caused a number of headaches due to the size change\nof the involved types.\n\nIt turns out that we don't have _that_ many places that access these\nfields directly and were affected, but we have more than we strictly\nshould have, because our low-level helper functions have been designed\nto have intimate knowledge of how the pipes work.\n\nAnd as a result, that random noise of direct 'pipe->head' and\n'pipe->tail' accesses makes it harder to pinpoint any actual potential\nproblem spots remaining.\n\nFor example, we didn't have a \"is the pipe full\" helper function, but\ninstead had a \"given these pipe buffer indexes and this pipe size, is\nthe pipe full\".  That's because some low-level pipe code does actually\nwant that much more complicated interface.\n\nBut most other places literally just want a \"is the pipe full\" helper,\nand not having it meant that those places ended up being unnecessarily\nmuch too aware of this all.\n\nIt would have been much better if only the very core pipe code that\ncared had been the one aware of this all.\n\nSo let's fix it - better late than never.  This just introduces the\ntrivial wrappers for \"is this pipe full or empty\" and to get how many\npipe buffers are used, so that instead of writing\n\n        if (pipe_full(pipe->head, pipe->tail, pipe->max_usage))\n\nthe places that literally just want to know if a pipe is full can just\nsay\n\n        if (pipe_is_full(pipe))\n\ninstead.  The existing trivial cases were converted with a 'sed' script.\n\nThis cuts down on the places that access pipe->head and pipe->tail\ndirectly outside of the pipe code (and core splice code) quite a lot.\n\nThe splice code in particular still revels in doing the direct low-level\naccesses, and the fuse fuse_dev_splice_write() code also seems a bit\nunnecessarily eager to go very low-level, but it's at least a bit better\nthan it used to be.\n\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "deletions": 23,
+      "files_changed": 7,
+      "hash": "00a7d39898c8010bfd5ff62af31ca5db34421b38",
+      "subject": "fs/pipe: add simpler helpers for common cases",
+      "trailers": {
+        "Signed-off-by": [
+          "Linus Torvalds <torvalds@linux-foundation.org>"
+        ]
+      }
+    },
+    {
+      "additions": 287,
+      "body": "This reverts commit 36f5f026df6c1cd8a20373adc4388d2b3401ce91, reversing\nchanges made to 43a7eec035a5b64546c8adefdc9cf96a116da14b.\n\nThomas says:\n \"I just noticed that for some incomprehensible reason, probably sheer\n  incompetemce when trying to utilize b4, I managed to merge an outdated\n  _and_ buggy version of that series.\n\n  Can you please revert that merge completely?\"\n\nDone.\n\nRequested-by: Thomas Gleixner <tglx@linutronix.de>\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "deletions": 252,
+      "files_changed": 12,
+      "hash": "112e43e9fd3b999513b1914e2bf523ae509f4c7d",
+      "subject": "Revert \"Merge tag 'irq-msi-2025-03-23' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip\"",
+      "trailers": {
+        "Requested-by": [
+          "Thomas Gleixner <tglx@linutronix.de>"
+        ],
+        "Signed-off-by": [
+          "Linus Torvalds <torvalds@linux-foundation.org>"
+        ]
+      }
+    },
+    {
+      "additions": 1,
+      "body": "",
+      "deletions": 1,
+      "files_changed": 1,
+      "hash": "24d479d26b25bce5faea3ddd9fa8f3a6c3129ea7",
+      "subject": "Linux 6.19-rc6",
+      "trailers": {}
+    },
+    {
+      "additions": 1211,
+      "body": "This converts some of the visually simpler cases that have been split\nover multiple lines.  I only did the ones that are easy to verify the\nresulting diff by having just that final GFP_KERNEL argument on the next\nline.\n\nSomebody should probably do a proper coccinelle script for this, but for\nme the trivial script actually resulted in an assertion failure in the\nmiddle of the script.  I probably had made it a bit _too_ trivial.\n\nSo after fighting that far a while I decided to just do some of the\nsyntactically simpler cases with variations of the previous 'sed'\nscripts.\n\nThe more syntactically complex multi-line cases would mostly really want\nwhitespace cleanup anyway.\n\nSigned-off-by: Linus Torvalds <torvalds@linux-foundation.org>",
+      "deletions": 2422,
+      "files_changed": 826,
+      "hash": "32a92f8c89326985e05dce8b22d3f0aa07a3e1bd",
+      "subject": "Convert more 'alloc_obj' cases to default GFP_KERNEL arguments",
+      "trailers": {
+        "Signed-off-by": [
+          "Linus Torvalds <torvalds@linux-foundation.org>"
+        ]
+      }
+    }
+  ],
+  "semantic_cues": {
+    "mechanics_rate": 0.32,
+    "rationale_rate": 0.32
+  },
+  "subject": {
+    "capitalized_start_rate": 0.71,
+    "char_length": {
+      "count": 100,
+      "max": 96,
+      "mean": 34.46,
+      "median": 19.5,
+      "min": 10,
+      "p10": 14.0,
+      "p90": 68.10000000000001
+    },
+    "imperative_proxy_rate": 0.35,
+    "prefix_rate": 0.26,
+    "top_prefixes": [
+      {
+        "count": 7,
+        "prefix": "fs/pipe"
+      },
+      {
+        "count": 6,
+        "prefix": "gcc-15"
+      },
+      {
+        "count": 3,
+        "prefix": "x86"
+      },
+      {
+        "count": 1,
+        "prefix": "slab.h"
+      },
+      {
+        "count": 1,
+        "prefix": "tools/testing"
+      },
+      {
+        "count": 1,
+        "prefix": "x86/hv"
+      },
+      {
+        "count": 1,
+        "prefix": "ocfs2"
+      },
+      {
+        "count": 1,
+        "prefix": "iommu/amd"
+      },
+      {
+        "count": 1,
+        "prefix": "samples"
+      },
+      {
+        "count": 1,
+        "prefix": "mm/huge_memory"
+      },
+      {
+        "count": 1,
+        "prefix": "MAINTAINERS"
+      },
+      {
+        "count": 1,
+        "prefix": "eventpoll"
+      }
+    ],
+    "word_length": {
+      "count": 100,
+      "max": 16,
+      "mean": 4.93,
+      "median": 3.0,
+      "min": 1,
+      "p10": 2.0,
+      "p90": 10.0
+    }
+  },
+  "trailers": {
+    "present_rate": 0.5,
+    "top_keys": [
+      {
+        "count": 64,
+        "key": "Cc"
+      },
+      {
+        "count": 51,
+        "key": "Signed-off-by"
+      },
+      {
+        "count": 22,
+        "key": "Fixes"
+      },
+      {
+        "count": 15,
+        "key": "Reported-by"
+      },
+      {
+        "count": 15,
+        "key": "Link"
+      },
+      {
+        "count": 6,
+        "key": "Acked-by"
+      },
+      {
+        "count": 5,
+        "key": "Reported-and-tested-by"
+      },
+      {
+        "count": 2,
+        "key": "Reviewed-by"
+      },
+      {
+        "count": 2,
+        "key": "Triggered-by"
+      },
+      {
+        "count": 2,
+        "key": "Closes"
+      },
+      {
+        "count": 2,
+        "key": "Tested-by"
+      },
+      {
+        "count": 1,
+        "key": "Suggested-by"
+      }
+    ]
+  }
+}
